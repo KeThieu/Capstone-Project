@@ -34,7 +34,8 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
     private static final String[] songGridColumns = {
             SongContract.SmileEntry._ID,
             SongContract.SmileEntry.COLUMN_SONGNAME,
-            SongContract.SmileEntry.COLUMN_IMAGE
+            SongContract.SmileEntry.COLUMN_IMAGE,
+            SongContract.SmileEntry.COLUMN_MAINUNIT
     };
 
     /*
@@ -43,6 +44,7 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
     public static final int COL_SONG_ID = 0;
     public static final int COL_SONGNAME = 1;
     public static final int COL_SONGIMAGE = 2;
+    public static final int COL_SONGMAINUNIT = 3;
 
     public SongGridFragment() {
         // Required empty public constructor
@@ -71,7 +73,9 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
         mRecyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
 
         mSongAdapter = new SongAdapter(getActivity());
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+        //TODO make a custom GridLayoutManager with scrolling to prevent image latency issues
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_span_count)));
         mRecyclerView.setAdapter(mSongAdapter);
 
         return root;
@@ -105,7 +109,7 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
         //query Content Provider here with relevant projection
 
         //figure out a way to use the other two table content uris as well
-        Uri queryUri = SongContract.SmileEntry.CONTENT_URI;
+        Uri queryUri = SongContract.PureEntry.CONTENT_URI;
 
         return new CursorLoader(getActivity(),
                 queryUri,

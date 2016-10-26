@@ -2,11 +2,14 @@ package com.udacity_k.capstone.lovelivesif_songdatabase.dataRequest;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
 import android.util.Log;
 
+import com.udacity_k.capstone.lovelivesif_songdatabase.R;
 import com.udacity_k.capstone.lovelivesif_songdatabase.data.SongContract;
 import com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongGridFragment;
 
@@ -25,9 +28,19 @@ import java.util.Vector;
 public class fetchSongData extends AsyncTask<Void, Void, Void> {
     private static final String LOG_TAG = fetchSongData.class.getSimpleName();
     private Context mContext;
+    private Vector<ContentValues> finalSmileList;
+    private Vector<ContentValues> finalPureList;
+    private Vector<ContentValues> finalCoolList;
+    private int mCount;
 
     public fetchSongData(Context context) {
+
         mContext = context;
+        mCount = 0;
+        Log.v(LOG_TAG, "count at start of task is: " + mCount);
+        finalSmileList = new Vector<>();
+        finalPureList = new Vector<>();
+        finalCoolList = new Vector<>();
     }
     /*
     / function for parsing a jsonobject into a ContentValue
@@ -215,22 +228,34 @@ public class fetchSongData extends AsyncTask<Void, Void, Void> {
         //Just gonna delete all rows of the table first
 
         if(smileSongs.size() > 0) {
+            mCount += smileSongs.size();
+            finalSmileList.addAll(smileSongs);
+            /*
             ContentValues[] smileArray = new ContentValues[smileSongs.size()];
             smileSongs.toArray(smileArray);
             //mContext.getContentResolver().delete(SongContract.SmileEntry.CONTENT_URI, null, null);
             mContext.getContentResolver().bulkInsert(SongContract.SmileEntry.CONTENT_URI, smileArray);
+            */
         }
         if(pureSongs.size() > 0) {
+            mCount += pureSongs.size();
+            finalPureList.addAll(pureSongs);
+            /*
             ContentValues[] pureArray = new ContentValues[pureSongs.size()];
             pureSongs.toArray(pureArray);
            // mContext.getContentResolver().delete(SongContract.PureEntry.CONTENT_URI, null, null);
             mContext.getContentResolver().bulkInsert(SongContract.PureEntry.CONTENT_URI, pureArray);
+            */
         }
         if(coolSongs.size() > 0) {
+            mCount += coolSongs.size();
+            finalCoolList.addAll(coolSongs);
+            /*
             ContentValues[] coolArray = new ContentValues[coolSongs.size()];
             coolSongs.toArray(coolArray);
           //  mContext.getContentResolver().delete(SongContract.CoolEntry.CONTENT_URI, null, null);
             mContext.getContentResolver().bulkInsert(SongContract.CoolEntry.CONTENT_URI, coolArray);
+            */
         }
 
         /*
@@ -288,11 +313,52 @@ public class fetchSongData extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
+    public boolean checkToDelete() {
+        Log.i(LOG_TAG, "calling checkToDelete");
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
+        int current_songCount = sp.getInt(mContext.getString(R.string.db_songCount), 0); //default to 0
+        if(mCount > current_songCount) {
+            //current fetch total count is greater, delete contents of db before inserting.
+            Log.v(LOG_TAG, "Beginning delete");
+            mContext.getContentResolver().delete(SongContract.SmileEntry.CONTENT_URI, null, null);
+            mContext.getContentResolver().delete(SongContract.PureEntry.CONTENT_URI, null, null);
+            mContext.getContentResolver().delete(SongContract.CoolEntry.CONTENT_URI, null, null);
+            return true;
+        } else {
+            Log.v(LOG_TAG, "count is 0 or songcount is the same, so don't delete");
+            return false;
+        }
+    }
+
+    public void insertSongData() {
+        Log.i(LOG_TAG, "calling insertSongData");
+        Log.v(LOG_TAG, "Total Song Count is: " + mCount + " songs.");
+
+        boolean upToDate = checkToDelete();
+
+        if(upToDate) {
+            Log.v(LOG_TAG, "Insert because list isn't up to date");
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
+            sp.edit().putInt(mContext.getString(R.string.db_songCount), mCount).apply();
+
+            ContentValues[] newFinalSmile = new ContentValues[finalSmileList.size()];
+            finalSmileList.toArray(newFinalSmile);
+            mContext.getContentResolver().bulkInsert(SongContract.SmileEntry.CONTENT_URI, newFinalSmile);
+            ContentValues[] newFinalPure = new ContentValues[finalPureList.size()];
+            finalPureList.toArray(newFinalPure);
+            mContext.getContentResolver().bulkInsert(SongContract.PureEntry.CONTENT_URI, newFinalPure);
+            ContentValues[] newFinalCool = new ContentValues[finalCoolList.size()];
+            finalCoolList.toArray(newFinalCool);
+            mContext.getContentResolver().bulkInsert(SongContract.CoolEntry.CONTENT_URI, newFinalCool);
+        }
+    }
+
     public Void doInBackground(Void... params) {
 
         String authorityStr = "http://schoolido.lu/api/songs/";
         //no queries I am interested in
         makeConnection(Uri.parse(authorityStr));
+        insertSongData();
         return null;
     }
 

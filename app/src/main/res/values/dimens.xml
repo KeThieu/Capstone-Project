@@ -7,6 +7,7 @@
 
     <!--List values -->
     <dimen name="list_sideMargin">4dp</dimen>
-    <integer name="grid_span_count">3</integer>
+    <integer name="grid_span_count">2</integer>
+    <dimen name="list_textBoxHeight">50dp</dimen>
 
 </resources>

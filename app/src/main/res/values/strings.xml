@@ -7,6 +7,12 @@
     <string name="pure_string" translatable="false">Pure</string>
     <string name="cool_string" translatable="false">Cool</string>
 
+    <!--Unit name color check -->
+    <string name="AqoursText" translatable="false">Aqours</string>
+
+    <!--Shared Preference strings-->
+    <string name="db_songCount" translatable="false">dbSongCount</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

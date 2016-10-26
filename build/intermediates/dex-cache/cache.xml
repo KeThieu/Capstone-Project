@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="0874286cc2fd88d54fdf130e9d5372730da6de97">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.0.0_4feb2c2fb182d49f8eb11f97d5137d705626f756\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\exploded-aar\com.android.support\design\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="fc29308a7a8f6d4407b34634eb48fb8b817f9b23">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-24.0.0_9389ee1733aaf6c7c7ae39bd15a48bffbe2f519a\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4e8a1ace66760ddd56b7d18f68873bc42e3d12dc">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_50bdfc42566f89a1c160637f1b7445fff6e045ec\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.0.0_b8cab2d0c50fff7f2305bcb38bc1d8c2d8195011\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="894922f67adeaaef51f077a29e315da21a3382d3">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.0.0_9fad5539e48a49377203958547678d89709e2826\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="e70f608219ed6b974644c333249ab2bb7b71de98">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.0.0_bbd57e4e9d65bcc073aff627e9ab2463fcacfbd1\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\24.0.0\2943c74db6d4346ab8c6531adac91fa05c137c40\support-annotations-24.0.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.0.0_99416f9df5f950f58a9a3ac46c4f67a61e2cb682\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.7.0_7161635ba2d4445a8a6acb82585d66031a49754c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="3bd97cfefd783e9de1dd1c30574a6adb44b4409b">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.0.0_488f7a53ffa80f9bf9fb2084dce881d973bb48cc\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\libs\internal_impl-24.0.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.0.0_06fedb39999067a6121d6a241339cf3c3cb70ee1\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="88708dc4c2b52e55041e24e9c96b8b6de667a979">
+        <dex dex="C:\Users\Kenneth\Android_Apps\LoveLiveSIF_SongDatabase\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_546495889e0593223b45758d953d22cd1fd1651a\classes.dex" />
+    </item>
+
+</items>
