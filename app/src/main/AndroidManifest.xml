@@ -3,6 +3,7 @@
     package="com.udacity_k.capstone.lovelivesif_songdatabase">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -27,6 +28,10 @@
             android:name=".data.SongProvider"
             android:exported="false"
             android:syncable="true"></provider>
+
+        <service
+            android:name=".dataRequest.fetchSongsIntentService"
+            android:exported="false"/>
     </application>
 
 </manifest>

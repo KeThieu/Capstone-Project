@@ -22,6 +22,8 @@ import com.udacity_k.capstone.lovelivesif_songdatabase.data.SongContract;
 public class SongGridFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String LOG_TAG = SongGridFragment.class.getSimpleName();
+    private static final String ARG_PAGE = "ARG_PAGE";
+    private static Uri attribute_query = SongContract.SmileEntry.CONTENT_URI; //default smile for now
 
     private OnSongGridFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
@@ -56,14 +58,45 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
      *
      * @return A new instance of fragment SongGridFragment.
      */
-    public static SongGridFragment newInstance() {
+    public static SongGridFragment newInstance(int position) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_PAGE, position);
         SongGridFragment fragment = new SongGridFragment();
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int arg_position = this.getArguments().getInt(ARG_PAGE);
+
+        /*
+        * For use with CursorLoader to get the right queryUri
+         */
+        switch(arg_position) {
+            case 0 : {
+                attribute_query = SongContract.SmileEntry.CONTENT_URI;
+                break;
+            }
+
+            case 1 : {
+                attribute_query = SongContract.PureEntry.CONTENT_URI;
+                break;
+            }
+
+            case 2 : {
+                attribute_query = SongContract.CoolEntry.CONTENT_URI;
+                break;
+            }
+            default : {
+                throw new UnsupportedOperationException("Unknown position at: " + String.valueOf(arg_position));
+            }
+        }
+        Log.v(LOG_TAG, "Uri from onCreate is : " + attribute_query.toString());
+
+        //moved from OnActivityCreated to here
+        getLoaderManager().initLoader(SONGS_LOADER, null, this);
     }
 
     @Override
@@ -100,7 +133,6 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(SONGS_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -109,10 +141,10 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
         //query Content Provider here with relevant projection
 
         //figure out a way to use the other two table content uris as well
-        Uri queryUri = SongContract.PureEntry.CONTENT_URI;
+        //Uri queryUri = SongContract.PureEntry.CONTENT_URI;
 
         return new CursorLoader(getActivity(),
-                queryUri,
+                attribute_query,
                 songGridColumns,
                 null,
                 null,
@@ -122,6 +154,7 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.v(LOG_TAG, "Count from LoadFinished and " +attribute_query.toString() + " is: " + data.getCount());
         mSongAdapter.swapCursor(data);
     }
 

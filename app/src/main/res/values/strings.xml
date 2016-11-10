@@ -13,6 +13,14 @@
     <!--Shared Preference strings-->
     <string name="db_songCount" translatable="false">dbSongCount</string>
 
+    <!--Snackbar Strings -->
+    <string name="NetworkError_Str">Network Error</string>
+    <string name="NetworkErrorSnackbarAction_Str">Retry</string>
+    <string name="Updating_Str">Updating...</string>
+
+    <!-- Action Bar Icon Name -->
+    <string name="action_sync" translatable="false">Sync</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
