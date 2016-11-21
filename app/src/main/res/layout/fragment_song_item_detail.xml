@@ -88,15 +88,14 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:layout_height="250dp"
+                android:layout_gravity="center_vertical">
 
+                <!-- You had wrap_content for both FrameLayout and it's child ViewPager <3 -->
                 <android.support.v4.view.ViewPager
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/frag_difficultiesViewPager">
-                </android.support.v4.view.ViewPager>
+                    android:id="@+id/frag_difficultiesViewPager"/>
 
             </FrameLayout>
 
