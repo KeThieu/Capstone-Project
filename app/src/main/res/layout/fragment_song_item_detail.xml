@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/frag_coordinatorLayout"
+    tools:showIn="@layout/content_song_item_detail">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:fitsSystemWindows="true"
+        android:id="@+id/frag_appBarLayout">
+
+       <android.support.design.widget.CollapsingToolbarLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:contentScrim="@android:color/transparent"
+           app:layout_scrollFlags="scroll|exitUntilCollapsed"
+           android:id="@+id/frag_collapsingToolbarLayout">
+
+           <ImageView
+               android:id="@+id/frag_songThumbnail"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/detail_photo_height"
+               android:scaleType="fitCenter"
+               android:fitsSystemWindows="true"
+               app:layout_collapseMode="parallax" />
+
+           <android.support.v7.widget.Toolbar
+               android:id="@+id/frag_toolbar"
+               android:layout_width="match_parent"
+               android:layout_height="?attr/actionBarSize"
+               android:background="@android:color/transparent"
+               app:layout_collapseMode="pin"/>
+
+       </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/frag_scrollview">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/frag_linearRoot">
+            <LinearLayout
+                style="@style/detailTextBoxNamesStyle"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/detail_textViewCaptionStyle"
+                    android:text="@string/song_name"/>
+
+                <TextView
+                    style="@style/detail_textViewStyle"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:text="@string/song_name"
+                    android:id="@+id/detail_songName"/>
+
+                <TextView
+                    style="@style/detail_textViewCaptionStyle"
+                    android:text="@string/romanized_name"/>
+
+                <TextView
+                    style="@style/detail_textViewStyle"
+                    android:text="@string/romanized_name"
+                    android:id="@+id/detail_romanizedName"/>
+
+                <TextView
+                    style="@style/detail_textViewCaptionStyle"
+                    android:text="@string/translated_name"/>
+
+                <TextView
+                    style="@style/detail_textViewStyle"
+                    android:text="@string/translated_name"
+                    android:id="@+id/detail_translatedName"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <android.support.v4.view.ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/frag_difficultiesViewPager">
+                </android.support.v4.view.ViewPager>
+
+            </FrameLayout>
+
+            <LinearLayout
+                style="@style/detailTextBoxStyle"
+                android:orientation="vertical"
+                android:id="@+id/frag_linearDetailsPane">
+
+                <!-- a bunch of text here -->
+                <TextView
+                    style="@style/detail_textViewCaptionStyle"
+                    android:text="@string/unit_name"/>
+
+                <TextView
+                    style="@style/detail_textViewStyle"
+                    android:text="@string/unit_name"
+                    android:id="@+id/detail_unitName"/>
+
+                <TextView
+                    style="@style/detail_textViewCaptionStyle"
+                    android:text="@string/attribute_name"/>
+
+                <TextView
+                    style="@style/detail_textViewStyle"
+                    android:text="@string/attribute_name"
+                    android:id="@+id/detail_attribute"/>
+
+                <TextView
+                    style="@style/detail_textViewCaptionStyle"
+                    android:text="@string/song_length_name"/>
+
+                <TextView
+                   style="@style/detail_textViewStyle"
+                    android:text="@string/song_length_name"
+                    android:id="@+id/detail_songLength"/>
+
+                <TextView
+                    style="@style/detail_textViewCaptionStyle"
+                    android:text="@string/song_bpm_name"/>
+
+                <TextView
+                    style="@style/detail_textViewStyle"
+                    android:text="@string/song_bpm_name"
+                    android:id="@+id/detail_songBPM"/>
+
+                <TextView
+                    style="@style/detail_textViewCaptionStyle"
+                    android:text="@string/available_name"/>
+
+                <TextView
+                    style="@style/detail_textViewStyle"
+                    android:text="@string/available_name"
+                    android:id="@+id/detail_available"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

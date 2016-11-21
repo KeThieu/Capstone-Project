@@ -31,7 +31,7 @@ public class SongDbHelper extends SQLiteOpenHelper {
                 SongContract.SmileEntry.COLUMN_LENGTH + " INTEGER, " +
                 SongContract.SmileEntry.COLUMN_BPM + " INTEGER, " +
                 SongContract.SmileEntry.COLUMN_IMAGE + " TEXT, " +
-                SongContract.SmileEntry.COLUMN_AVAILABLE + " BOOLEAN, " +
+                SongContract.SmileEntry.COLUMN_AVAILABLE + " TEXT, " +
                 SongContract.SmileEntry.COLUMN_EASYDIFFICULTY + " INTEGER, " +
                 SongContract.SmileEntry.COLUMN_EASYNOTES + " INTEGER, " +
                 SongContract.SmileEntry.COLUMN_NORMALDIFFICULTY + " INTEGER, " +
@@ -54,7 +54,7 @@ public class SongDbHelper extends SQLiteOpenHelper {
                 SongContract.PureEntry.COLUMN_LENGTH + " INTEGER, " +
                 SongContract.PureEntry.COLUMN_BPM + " INTEGER, " +
                 SongContract.PureEntry.COLUMN_IMAGE + " TEXT, " +
-                SongContract.PureEntry.COLUMN_AVAILABLE + " BOOLEAN, " +
+                SongContract.PureEntry.COLUMN_AVAILABLE + " TEXT, " +
                 SongContract.PureEntry.COLUMN_EASYDIFFICULTY + " INTEGER, " +
                 SongContract.PureEntry.COLUMN_EASYNOTES + " INTEGER, " +
                 SongContract.PureEntry.COLUMN_NORMALDIFFICULTY + " INTEGER, " +
@@ -77,7 +77,7 @@ public class SongDbHelper extends SQLiteOpenHelper {
                 SongContract.CoolEntry.COLUMN_LENGTH + " INTEGER, " +
                 SongContract.CoolEntry.COLUMN_BPM + " INTEGER, " +
                 SongContract.CoolEntry.COLUMN_IMAGE + " TEXT, " +
-                SongContract.CoolEntry.COLUMN_AVAILABLE + " BOOLEAN, " +
+                SongContract.CoolEntry.COLUMN_AVAILABLE + " TEXT, " +
                 SongContract.CoolEntry.COLUMN_EASYDIFFICULTY + " INTEGER, " +
                 SongContract.CoolEntry.COLUMN_EASYNOTES + " INTEGER, " +
                 SongContract.CoolEntry.COLUMN_NORMALDIFFICULTY + " INTEGER, " +

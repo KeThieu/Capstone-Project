@@ -7,6 +7,9 @@
     <string name="pure_string" translatable="false">Pure</string>
     <string name="cool_string" translatable="false">Cool</string>
 
+    <string name="yes_string">Yes</string>
+    <string name="no_string">No</string>
+
     <!--Unit name color check -->
     <string name="AqoursText" translatable="false">Aqours</string>
 
@@ -21,6 +24,20 @@
     <!-- Action Bar Icon Name -->
     <string name="action_sync" translatable="false">Sync</string>
 
+    <!--Detail Caption Strings -->
+    <string name="song_name">Song Name</string>
+    <string name="romanized_name">Romanized Name</string>
+    <string name="translated_name">Translated Name</string>
+    <string name="unit_name">Unit Name</string>
+    <string name="attribute_name">Attribute</string>
+    <string name="song_length_name">Song Length</string>
+    <string name="song_bpm_name">Song BPM (Beats Per Minute)</string>
+    <string name="available_name">Available To Play</string>
+    <string name="difficulty_name">Difficulty Name</string>
+    <string name="difficulty_level_name">Difficulty Level</string>
+    <string name="difficulty_notes_name">Note Count</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_song_item_detail">SongItemDetailActivity</string>
 </resources>

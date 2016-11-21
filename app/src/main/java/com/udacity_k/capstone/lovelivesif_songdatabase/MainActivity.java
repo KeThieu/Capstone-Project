@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.udacity_k.capstone.lovelivesif_songdatabase.adapters.AttributePageAdapter;
+import com.udacity_k.capstone.lovelivesif_songdatabase.adapters.SongAdapter;
 import com.udacity_k.capstone.lovelivesif_songdatabase.dataRequest.fetchSongData;
 import com.udacity_k.capstone.lovelivesif_songdatabase.dataRequest.fetchSongsIntentService;
 import com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongGridFragment;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
     private ViewPager mViewPager;
     private Snackbar updateSnackbar;
     private Snackbar networkSnackbar;
+
+    private final String updatingKey = "UPDATING";
     private boolean isUpdating = false; //flag for updating snackbar
     private boolean isConnected = true; //flag for network error, prevent user from touching for details
 
@@ -42,15 +46,28 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //For now, when tablet implementation happens, don't set orientation to portrait
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         mCoordinatorLayout = (CoordinatorLayout) this.findViewById(R.id.coordinator_root);
         mTabLayout = (TabLayout) this.findViewById(R.id.tab_Layout);
         mViewPager = (ViewPager) this.findViewById(R.id.main_viewPager);
 
-        mViewPager.setAdapter(new AttributePageAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new AttributePageAdapter(getSupportFragmentManager(), this));
         mTabLayout.setupWithViewPager(mViewPager);
 
         //new fetchSongData(this).execute();
-        startService(new Intent(this, fetchSongsIntentService.class));
+        if(savedInstanceState == null) {
+            startService(new Intent(this, fetchSongsIntentService.class));
+        } else {
+            //check for bundle for boolean
+            boolean checkCurrentlyUpdating = savedInstanceState.getBoolean(updatingKey);
+            Log.v(LOG_TAG, "update is currently : " + String.valueOf(checkCurrentlyUpdating));
+            if(!checkCurrentlyUpdating) {
+                Log.v(LOG_TAG, "shouldn't be here when updating is true");
+                startService(new Intent(this, fetchSongsIntentService.class));
+            }
+        }
     }
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -139,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
         if(updateSnackbar != null) {
             updateSnackbar.dismiss();
             updateSnackbar = null;
-            isUpdating = false;
+            //isUpdating = false;
         }
     }
 
@@ -151,7 +168,19 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        //if updating, on screen orietentation change, don't run update again
+        Log.v(LOG_TAG, "Update on Save is : " + String.valueOf(isUpdating));
+        savedInstanceState.putBoolean(updatingKey, isUpdating);
+        super.onSaveInstanceState(savedInstanceState);
+    }
 
+    @Override
+    public void onFragmentInteraction(Uri uri, SongAdapter.songImageViewHolder vh) {
+        //this is called when item is clicked, launch detail activity here
+        Log.v(LOG_TAG, "MainActivity onFragmentInteraction is called");
+
+        Intent intent = new Intent(this, SongItemDetailActivity.class).setData(uri);
+        startActivity(intent);
     }
 }

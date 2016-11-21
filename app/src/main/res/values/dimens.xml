@@ -6,8 +6,21 @@
     <dimen name="text_margin">16dp</dimen>
 
     <!--List values -->
+    <dimen name="toolbarElevation">8dp</dimen>
     <dimen name="list_sideMargin">4dp</dimen>
     <integer name="grid_span_count">2</integer>
-    <dimen name="list_textBoxHeight">50dp</dimen>
+    <dimen name="list_textBoxHeight">60dp</dimen>
+    <dimen name="list_textBoxPadding">10dp</dimen>
+
+    <!--Detail values -->
+    <dimen name="detail_photo_height">300dp</dimen>
+    <dimen name="detail_textBoxHeight">100dp</dimen>
+    <dimen name="detail_textCaptionPadding">2dp</dimen>
+    <dimen name="detail_textPadding">10dp</dimen>
+    <dimen name="detail_textDetailPadding">4dp</dimen>
+    <dimen name="detail_textNameBoxPadding">16dp</dimen>
+
+    <!--Card Values -->
+    <dimen name="card_padding">24dp</dimen>
 
 </resources>

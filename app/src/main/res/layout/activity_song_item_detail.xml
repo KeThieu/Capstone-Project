@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/song_detail_container"
+    tools:context="com.udacity_k.capstone.lovelivesif_songdatabase.SongItemDetailActivity">
+
+    <!--
+    <include layout="@layout/fragment_song_item_detail" /> -->
+</FrameLayout>
+
+

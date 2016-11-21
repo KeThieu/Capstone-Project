@@ -142,9 +142,10 @@ public class fetchSongsIntentService extends IntentService {
             values.put(SongContract.SmileEntry.COLUMN_IMAGE, noInfo);
         }
         if(!songData.isNull(availableNameSTR)) {
-            values.put(SongContract.SmileEntry.COLUMN_AVAILABLE, songData.getBoolean(availableNameSTR));
-        } else {
-            values.put(SongContract.SmileEntry.COLUMN_AVAILABLE, false);
+            Boolean availableBool = songData.getBoolean(availableNameSTR);
+            String availableString = availableBool ?
+                    this.getResources().getString(R.string.yes_string) : this.getResources().getString(R.string.no_string);
+            values.put(SongContract.SmileEntry.COLUMN_AVAILABLE, availableString);
         }
         if(!songData.isNull(easyDiffNameSTR)) {
             values.put(SongContract.SmileEntry.COLUMN_EASYDIFFICULTY, songData.getInt(easyDiffNameSTR));

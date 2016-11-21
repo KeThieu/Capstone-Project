@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.udacity_k.capstone.lovelivesif_songdatabase.R;
+import com.udacity_k.capstone.lovelivesif_songdatabase.data.SongContract;
 import com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongGridFragment;
 
 /**
@@ -21,9 +23,15 @@ import com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongGridFragmen
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.songImageViewHolder> {
     private Context mContext;
     private Cursor mCursor;
+    private SongAdapterOnClickHandler songClickHandler;
 
-    public SongAdapter(Context context) {
+    public SongAdapter(Context context, SongAdapterOnClickHandler clickHandler) {
         mContext = context;
+        songClickHandler = clickHandler;
+    }
+
+    public interface SongAdapterOnClickHandler {
+        void onClick(long id, String attribute, songImageViewHolder vh);
     }
 
     @Override
@@ -45,10 +53,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.songImageViewH
 
         if(songUnit.equals(mContext.getResources().getString(R.string.AqoursText))) {
             //Aqours
-            holder.songUnit.setTextColor(ContextCompat.getColor(mContext, R.color.colorListItemTextAqours));
+            holder.textBox.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorListItemTextAqours));
         } else {
             //µ's
-            holder.songUnit.setTextColor(ContextCompat.getColor(mContext, R.color.colorListItemTextMuse));
+            holder.textBox.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorListItemTextMuse));
         }
 
         if(null != imageURL) {
@@ -81,16 +89,34 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.songImageViewH
         return mCursor.getCount();
     }
 
-    public static class songImageViewHolder extends RecyclerView.ViewHolder {
+    public class songImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView songImage;
         public TextView songName;
         public TextView songUnit;
+        public LinearLayout textBox;
 
         public songImageViewHolder(View view) {
             super(view);
             songImage = (ImageView) view.findViewById(R.id.image_song);
             songName = (TextView) view.findViewById(R.id.song_title_text);
             songUnit = (TextView) view.findViewById(R.id.song_unit_text);
+            textBox = (LinearLayout) view.findViewById(R.id.list_textBox);
+            view.setOnClickListener(this); //we implement onclicklistener and set ourselves here
+        }
+
+        /*
+        *   Note, Created a OnClickHandler to handle passing values from the item position to the fragment
+        *   to Main Activity, we use viewholder to our advantage for position
+         */
+        @Override
+        public void onClick(View view) {
+            int adapterPosition = getAdapterPosition();
+            mCursor.moveToPosition(adapterPosition);
+            //int songIDIndex = mCursor.getColumnIndex(SongContract.SmileEntry._ID); //should be the same for all three tables
+            songClickHandler.onClick(
+                    mCursor.getLong(SongGridFragment.COL_SONG_ID),
+                    mCursor.getString(SongGridFragment.COL_ATTRIBUTE),
+                    this);
         }
     }
 }

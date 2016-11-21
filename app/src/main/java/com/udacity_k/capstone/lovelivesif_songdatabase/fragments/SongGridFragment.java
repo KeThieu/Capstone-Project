@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.ParallelExecutorCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,7 +39,8 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
             SongContract.SmileEntry._ID,
             SongContract.SmileEntry.COLUMN_SONGNAME,
             SongContract.SmileEntry.COLUMN_IMAGE,
-            SongContract.SmileEntry.COLUMN_MAINUNIT
+            SongContract.SmileEntry.COLUMN_MAINUNIT,
+            SongContract.SmileEntry.COLUMN_ATTRIBUTE
     };
 
     /*
@@ -47,6 +50,11 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
     public static final int COL_SONGNAME = 1;
     public static final int COL_SONGIMAGE = 2;
     public static final int COL_SONGMAINUNIT = 3;
+    public static final int COL_ATTRIBUTE = 4;
+
+    private String smileSTR;
+    private String pureSTR;
+    private String coolSTR;
 
     public SongGridFragment() {
         // Required empty public constructor
@@ -69,6 +77,11 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        smileSTR = getActivity().getResources().getString(R.string.smile_string);
+        pureSTR = getActivity().getResources().getString(R.string.pure_string);
+        coolSTR = getActivity().getResources().getString(R.string.cool_string);
+
         int arg_position = this.getArguments().getInt(ARG_PAGE);
 
         /*
@@ -105,9 +118,32 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
         View root = inflater.inflate(R.layout.fragment_song_grid, container, false);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
 
-        mSongAdapter = new SongAdapter(getActivity());
+        mSongAdapter = new SongAdapter(getActivity(), new SongAdapter.SongAdapterOnClickHandler() {
+            @Override
+            public void onClick(long id, String attribute, SongAdapter.songImageViewHolder vh) {
+                //this handles on Click and call back to Main Activity to launch detail activity
+                //for now, snackbar this for data
 
-        //TODO make a custom GridLayoutManager with scrolling to prevent image latency issues
+                Log.v(LOG_TAG, "Attribute string on click is : " + attribute);
+
+                //get the correct Uri to send to Main Activity
+                Uri queryUri;
+                if(attribute.equals(smileSTR)) {
+                    queryUri = SongContract.SmileEntry.buildSmileUri(id);
+                } else if(attribute.equals(pureSTR)) {
+                    queryUri = SongContract.PureEntry.buildPureUri(id);
+                } else if(attribute.equals(coolSTR)) {
+                    queryUri = SongContract.CoolEntry.buildCoolUri(id);
+                } else {
+                    //shouldn't reach here
+                    throw new RuntimeException("QUERY URI UNKNOWN ON CLICK");
+                }
+
+                //calling MainActivity fragment interaction here
+                mListener.onFragmentInteraction(queryUri, vh);
+            }
+        });
+
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.grid_span_count)));
         mRecyclerView.setAdapter(mSongAdapter);
 
@@ -154,7 +190,7 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        Log.v(LOG_TAG, "Count from LoadFinished and " +attribute_query.toString() + " is: " + data.getCount());
+        Log.v(LOG_TAG, "Count from LoadFinished and " + attribute_query.toString() + " is: " + data.getCount());
         mSongAdapter.swapCursor(data);
     }
 
@@ -170,6 +206,6 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
      * activity.
      */
     public interface OnSongGridFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(Uri uri, SongAdapter.songImageViewHolder vh);
     }
 }

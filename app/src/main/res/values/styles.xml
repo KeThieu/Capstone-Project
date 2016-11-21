@@ -23,6 +23,55 @@
         <item name="android:background">@color/colorListItemTextBox</item>
     </style>
 
+    <style name="detailTextBoxStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorDetailTextBox</item>
+        <item name="android:paddingLeft">@dimen/detail_textNameBoxPadding</item>
+        <item name="android:paddingRight">@dimen/detail_textNameBoxPadding</item>
+        <item name="android:paddingTop">@dimen/detail_textNameBoxPadding</item>
+        <item name="android:paddingBottom">@dimen/detail_textNameBoxPadding</item>
+    </style>
 
+    <style name="detailTextBoxNamesStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorDetailNameTextBox</item>
+        <item name="android:paddingLeft">@dimen/detail_textNameBoxPadding</item>
+        <item name="android:paddingRight">@dimen/detail_textNameBoxPadding</item>
+        <item name="android:paddingTop">@dimen/detail_textNameBoxPadding</item>
+        <item name="android:paddingBottom">@dimen/detail_textNameBoxPadding</item>
+    </style>
+
+    <style name="detail_textViewCaptionStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorListItemText</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
+        <item name="android:paddingTop">@dimen/detail_textCaptionPadding</item>
+        <item name="android:paddingBottom">@dimen/detail_textCaptionPadding</item>
+    </style>
+
+    <style name="detail_textViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorListItemText</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:paddingTop">@dimen/detail_textCaptionPadding</item>
+        <item name="android:paddingLeft">@dimen/detail_textDetailPadding</item>
+        <item name="android:paddingBottom">@dimen/detail_textCaptionPadding</item>
+    </style>
+
+    <style name="card_titleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorListItemText</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:padding">@dimen/card_padding</item>
+
+    </style>
 
 </resources>

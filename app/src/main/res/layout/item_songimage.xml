@@ -13,6 +13,7 @@
 
     <LinearLayout
         style="@style/listItemTextBoxStyle"
+        android:id="@+id/list_textBox"
         android:layout_below="@id/image_song"
         android:orientation="vertical"
         >
@@ -21,6 +22,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/song_title_text"
             android:text="default song name"
+            android:fontFamily="sans-serif"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/colorListItemText"/>
 
@@ -29,8 +31,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/song_unit_text"
             android:text="default song unit"
+            android:fontFamily="sans-serif"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textColor="@color/colorListItemText"/>
+            android:textColor="@color/colorListItemText"
+            android:layout_marginBottom="@dimen/list_textBoxPadding"
+            android:layout_marginLeft="@dimen/list_textBoxPadding"
+            android:layout_marginStart="@dimen/list_textBoxPadding"/>
 
     </LinearLayout>
 
