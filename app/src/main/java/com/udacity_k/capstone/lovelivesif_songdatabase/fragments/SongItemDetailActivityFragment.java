@@ -29,10 +29,6 @@ import com.udacity_k.capstone.lovelivesif_songdatabase.R;
 import com.udacity_k.capstone.lovelivesif_songdatabase.adapters.DifficultiesPageAdapter;
 import com.udacity_k.capstone.lovelivesif_songdatabase.data.SongContract;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
-
 /**
  * A placeholder fragment containing a simple view.
  */

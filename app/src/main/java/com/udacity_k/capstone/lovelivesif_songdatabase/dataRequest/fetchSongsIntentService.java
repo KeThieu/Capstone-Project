@@ -52,7 +52,7 @@ public class fetchSongsIntentService extends IntentService {
         ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
         if(activeNetwork == null || !activeNetwork.isConnected()) {
-            Log.v(TAG, "Not connected to any active network");
+            //Log.v(TAG, "Not connected to any active network");
             Intent networkStatusIntent = new Intent(FETCH_ACTION);
             networkStatusIntent.putExtra(NETWORK_ERROR, true);
             LocalBroadcastManager.getInstance(this).sendBroadcast(networkStatusIntent);
@@ -96,7 +96,7 @@ public class fetchSongsIntentService extends IntentService {
         final String masterNotesNameSTR = "master_notes";
 
         //defaults to store into database in case of null
-        final String noInfo = "No information available";
+        final String noInfo = getResources().getString(R.string.NoInformationAvailable);
         final int noIntInfo = 0;
 
         //All the columns names in all three tables are the same, so I'll default
@@ -247,8 +247,8 @@ public class fetchSongsIntentService extends IntentService {
                 }
                 default:
                     //shouldn't reach here, but in the event a song hits this code, I'll log it for now.
-                    Log.v(TAG, "Null Attribute song detected" );
-                    throw new UnsupportedOperationException("null or unknonwn attribute");
+                    //Log.v(TAG, "Null Attribute song detected" );
+                    throw new UnsupportedOperationException(getResources().getString(R.string.UnsupportedOperation));
             }
         }
 
@@ -296,10 +296,10 @@ public class fetchSongsIntentService extends IntentService {
             return null;
 
         } catch (IOException ioexception) {
-            Log.e(TAG, "Error in IO " + ioexception + " " + uri.toString());
+            Log.e(TAG, "" + ioexception + " " + uri.toString());
 
         } catch (JSONException jsonexception) {
-            Log.e(TAG, "Error in JSON " + jsonexception);
+            Log.e(TAG, "" + jsonexception);
 
         } finally {
             if(connection != null) {
@@ -309,7 +309,7 @@ public class fetchSongsIntentService extends IntentService {
                 try {
                     reader.close();
                 } catch (final IOException e) {
-                    Log.e(TAG, "Error closing stream", e);
+                    Log.e(TAG, getResources().getString(R.string.ErrorClosingStream), e);
                 }
             }
         }
@@ -317,32 +317,32 @@ public class fetchSongsIntentService extends IntentService {
     }
 
     public boolean checkToDelete() {
-        Log.i(TAG, "calling checkToDelete");
+       // Log.i(TAG, "calling checkToDelete");
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         int current_songCount = sp.getInt(this.getString(R.string.db_songCount), 0); //default to 0
         if(mCount > current_songCount) {
             //current fetch total count is greater, delete contents of db before inserting.
-            Log.v(TAG, "Beginning delete");
+           // Log.v(TAG, "Beginning delete");
             this.getContentResolver().delete(SongContract.SmileEntry.CONTENT_URI, null, null);
             this.getContentResolver().delete(SongContract.PureEntry.CONTENT_URI, null, null);
             this.getContentResolver().delete(SongContract.CoolEntry.CONTENT_URI, null, null);
             return true;
         } else {
-            Log.v(TAG, "count is 0 or songcount is the same, so don't delete");
+          //  Log.v(TAG, "count is 0 or songcount is the same, so don't delete");
             return false;
         }
     }
 
     public void insertSongData() {
-        Log.i(TAG, "calling insertSongData");
-        Log.v(TAG, "Total Song Count is: " + mCount + " songs.");
+      //  Log.i(TAG, "calling insertSongData");
+      //  Log.v(TAG, "Total Song Count is: " + mCount + " songs.");
 
         boolean upToDate = checkToDelete();
         Intent updateStatusIntent = new Intent(FETCH_ACTION);
 
         if(upToDate) {
-            Log.v(TAG, "Insert because list isn't up to date");
+        //    Log.v(TAG, "Insert because list isn't up to date");
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             sp.edit().putInt(this.getString(R.string.db_songCount), mCount).apply();
 

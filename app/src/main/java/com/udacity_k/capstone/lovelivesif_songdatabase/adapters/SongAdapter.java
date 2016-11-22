@@ -40,7 +40,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.songImageViewH
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_songimage, parent, false);
             return new songImageViewHolder(view);
         } else {
-            throw new RuntimeException("Not bound to RecyclerView");
+            throw new RuntimeException();
         }
     }
 

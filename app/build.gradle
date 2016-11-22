@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'myApp'
             keyPassword 'password'
-            storeFile file('C:/Users/Kenneth/Android_Apps/LoveLiveSIF_SongDatabase/app/keystores/keystore.jks')
+            storeFile file('keystore.jks')
             storePassword 'password'
         }
     }

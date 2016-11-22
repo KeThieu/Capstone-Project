@@ -16,7 +16,7 @@ public class DetailWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
-        Log.v("WIDGET", "Widget Handle Intent");
+
         context.startService(new Intent(context, DetailWidgetIntentService.class));
 
     }
@@ -24,7 +24,7 @@ public class DetailWidgetProvider extends AppWidgetProvider {
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager,
                                           int appWidgetId, Bundle newOptions) {
-        Log.v("WIDGET2", "Widget Handle Intent");
+
         context.startService(new Intent(context, DetailWidgetIntentService.class));
     }
 

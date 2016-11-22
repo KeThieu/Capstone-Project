@@ -162,7 +162,8 @@ public class DifficultyDetailsFragment extends Fragment implements LoaderManager
                     break;
                 }
                 default:
-                    throw new UnsupportedOperationException("Unknown position at: " + String.valueOf(mPagePosition));
+                    throw new UnsupportedOperationException(
+                            getActivity().getResources().getString(R.string.UnsupportedOperation) + String.valueOf(mPagePosition));
             }
 
         }

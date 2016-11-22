@@ -49,6 +49,15 @@
     <string name="title_activity_song_item_detail">SongItemDetailActivity</string>
     <string name="title_detail_widget">Daily LLSIF Song</string>
 
+    <!--string error cases-->
+    <string name="UnsupportedOperation">UnsupportedOperationError</string>
+    <string name="FragmentInteractionError">Must implement FragmentInteraction Interface</string>
+    <string name="QueryUriUnknownError">Query URI not recognized</string>
+    <string name="NoInformationAvailable">No Information Available</string>
+    <string name="ErrorClosingStream">Error Closing Stream</string>
+    <string name="SQLException">SQLException</string>
+
+
     <!-- For TestAd -->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

@@ -103,10 +103,10 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
                 break;
             }
             default : {
-                throw new UnsupportedOperationException("Unknown position at: " + String.valueOf(arg_position));
+                throw new UnsupportedOperationException(
+                        getActivity().getResources().getString(R.string.UnsupportedOperation) + String.valueOf(arg_position));
             }
         }
-        Log.v(LOG_TAG, "Uri from onCreate is : " + attribute_query.toString());
 
         //moved from OnActivityCreated to here
         getLoaderManager().initLoader(SONGS_LOADER, null, this);
@@ -121,10 +121,7 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
         mSongAdapter = new SongAdapter(getActivity(), new SongAdapter.SongAdapterOnClickHandler() {
             @Override
             public void onClick(long id, String attribute, SongAdapter.songImageViewHolder vh) {
-                //this handles on Click and call back to Main Activity to launch detail activity
-                //for now, snackbar this for data
 
-                Log.v(LOG_TAG, "Attribute string on click is : " + attribute);
 
                 //get the correct Uri to send to Main Activity
                 Uri queryUri;
@@ -136,7 +133,7 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
                     queryUri = SongContract.CoolEntry.buildCoolUri(id);
                 } else {
                     //shouldn't reach here
-                    throw new RuntimeException("QUERY URI UNKNOWN ON CLICK");
+                    throw new RuntimeException(getActivity().getResources().getString(R.string.QueryUriUnknownError));
                 }
 
                 //calling MainActivity fragment interaction here
@@ -157,7 +154,7 @@ public class SongGridFragment extends Fragment implements LoaderManager.LoaderCa
             mListener = (OnSongGridFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getActivity().getResources().getString(R.string.FragmentInteractionError));
         }
     }
 

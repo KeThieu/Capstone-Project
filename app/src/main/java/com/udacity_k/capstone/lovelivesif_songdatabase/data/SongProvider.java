@@ -65,7 +65,7 @@ public class SongProvider extends ContentProvider {
              case COOL_SINGLE :
                  return SongContract.CoolEntry.CONTENT_ITEM_TYPE;
              default :
-                 throw new UnsupportedOperationException("Unknown uri: " + uri);
+                 throw new UnsupportedOperationException(uri.toString());
          }
     }
 
@@ -171,7 +171,7 @@ public class SongProvider extends ContentProvider {
             }
 
             default :
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+                throw new UnsupportedOperationException(uri.toString());
         }
         retCursor.setNotificationUri(getContext().getContentResolver(), uri);
         return retCursor;
@@ -190,7 +190,7 @@ public class SongProvider extends ContentProvider {
                     returnUri = SongContract.SmileEntry.buildSmileUri(_id);
                 } else {
                     //failed insert
-                    throw new android.database.SQLException("Failed to insert new row into : " + uri);
+                    throw new android.database.SQLException(uri.toString());
                 }
                 break;
             }
@@ -201,7 +201,7 @@ public class SongProvider extends ContentProvider {
                     returnUri = SongContract.PureEntry.buildPureUri(_id);
                 } else {
                     //failed insert
-                    throw new android.database.SQLException("Failed to insert new row into : " + uri);
+                    throw new android.database.SQLException(uri.toString());
                 }
                 break;
             }
@@ -212,12 +212,12 @@ public class SongProvider extends ContentProvider {
                     returnUri = SongContract.CoolEntry.buildCoolUri(_id);
                 } else {
                     //failed insert
-                    throw new android.database.SQLException("Failed to insert new row into : " + uri);
+                    throw new android.database.SQLException(uri.toString());
                 }
                 break;
             }
             default :
-                throw new UnsupportedOperationException("Unknown uri : " + uri);
+                throw new UnsupportedOperationException(uri.toString());
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return returnUri;
@@ -242,7 +242,7 @@ public class SongProvider extends ContentProvider {
                 break;
             }
             default :
-                throw new UnsupportedOperationException("Unknown uri : " + uri);
+                throw new UnsupportedOperationException(uri.toString());
         }
 
         if(rowsUpdated != 0) {
@@ -270,7 +270,7 @@ public class SongProvider extends ContentProvider {
                 break;
             }
             default :
-                throw new UnsupportedOperationException("Unknown uri : " + uri);
+                throw new UnsupportedOperationException(uri.toString());
         }
 
         if(selection == null || rowsDeleted != 0) {

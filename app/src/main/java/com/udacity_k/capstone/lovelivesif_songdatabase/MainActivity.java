@@ -11,26 +11,20 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.udacity_k.capstone.lovelivesif_songdatabase.adapters.AttributePageAdapter;
 import com.udacity_k.capstone.lovelivesif_songdatabase.adapters.SongAdapter;
-import com.udacity_k.capstone.lovelivesif_songdatabase.dataRequest.fetchSongData;
 import com.udacity_k.capstone.lovelivesif_songdatabase.dataRequest.fetchSongsIntentService;
 import com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongGridFragment;
 import com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongItemDetailActivityFragment;
@@ -85,15 +79,12 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
         mTabLayout.getTabAt(1).setContentDescription(R.string.pure_string);
         mTabLayout.getTabAt(2).setContentDescription(R.string.cool_string);
 
-        //new fetchSongData(this).execute();
         if(savedInstanceState == null) {
             startService(new Intent(this, fetchSongsIntentService.class));
         } else {
             //check for bundle for boolean
             boolean checkCurrentlyUpdating = savedInstanceState.getBoolean(updatingKey);
-            Log.v(LOG_TAG, "update is currently : " + String.valueOf(checkCurrentlyUpdating));
             if(!checkCurrentlyUpdating) {
-                Log.v(LOG_TAG, "shouldn't be here when updating is true");
                 startService(new Intent(this, fetchSongsIntentService.class));
             }
         }
@@ -159,24 +150,8 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        /*
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        */
-
-        if(id == R.id.action_sync) {
-            //use IntentService for sync here
-            if(!isUpdating) {
-                startService(new Intent(this, fetchSongsIntentService.class));
-            }
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -23,7 +23,7 @@ import java.util.Random;
  * Created by Kenneth on 11/22/2016.
  */
 public class DetailWidgetIntentService extends IntentService {
-    private static final String TAG = "DetailWidgetIntentService";
+    private static final String TAG = DetailWidgetIntentService.class.getSimpleName();
 
     public DetailWidgetIntentService() {
         super(TAG);
@@ -109,7 +109,7 @@ public class DetailWidgetIntentService extends IntentService {
                         detailQueryUri = SongContract.CoolEntry.buildCoolUri(song_id);
                         break;
                     default:
-                        throw new UnsupportedOperationException("Error");
+                        throw new UnsupportedOperationException(this.getResources().getString(R.string.UnsupportedOperation));
                 }
 
                 Intent launchIntent = new Intent(this, SongItemDetailActivity.class).setData(detailQueryUri);
