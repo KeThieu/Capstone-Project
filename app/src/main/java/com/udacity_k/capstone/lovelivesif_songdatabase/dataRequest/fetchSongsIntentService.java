@@ -178,6 +178,7 @@ public class fetchSongsIntentService extends IntentService {
             values.put(SongContract.SmileEntry.COLUMN_HARDNOTES, noIntInfo);
         }
         if(!songData.isNull(expertDiffNameSTR)) {
+
             values.put(SongContract.SmileEntry.COLUMN_EXPERTDIFFICULTY, songData.getInt(expertDiffNameSTR));
         } else {
             values.put(SongContract.SmileEntry.COLUMN_EXPERTDIFFICULTY, noIntInfo);
@@ -190,7 +191,7 @@ public class fetchSongsIntentService extends IntentService {
         if(!songData.isNull(masterDiffNameSTR)) {
             values.put(SongContract.SmileEntry.COLUMN_MASTERDIFFICULTY, songData.getInt(masterDiffNameSTR));
         } else {
-            values.put(SongContract.SmileEntry.COLUMN_EXPERTDIFFICULTY, noIntInfo);
+            values.put(SongContract.SmileEntry.COLUMN_MASTERDIFFICULTY, noIntInfo);
         }
         if(!songData.isNull(masterNotesNameSTR)) {
             values.put(SongContract.SmileEntry.COLUMN_MASTERNOTES, songData.getInt(masterNotesNameSTR));

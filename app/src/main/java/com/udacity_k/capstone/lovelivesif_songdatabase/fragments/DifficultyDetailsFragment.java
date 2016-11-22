@@ -1,10 +1,12 @@
 package com.udacity_k.capstone.lovelivesif_songdatabase.fragments;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +25,8 @@ public class DifficultyDetailsFragment extends Fragment implements LoaderManager
     private static final String ARG_DIFFICULTY_PAGE = "ARG_DIFFICULTY_PAGE";
     private static final String DIFFICULT_URI_KEY = "DIFFICULTY_URI_KEY";
     private static final int DIFFICULTYLOADERCURSOR = 0;
+
+    private Context mContext;
 
     private Uri difficultyQueryUri;
     private int mPagePosition;
@@ -46,12 +50,18 @@ public class DifficultyDetailsFragment extends Fragment implements LoaderManager
     private static final int COL_EASYNOTES = 2;
     private static final int COL_NORMALDIFFICULTY = 3;
     private static final int COL_NORMALNOTES = 4;
-    private static final int COL_HARDDIFFCULTY = 5;
+    private static final int COL_HARDDIFFICULTY = 5;
     private static final int COL_HARDNOTES = 6;
     private static final int COL_EXPERTDIFFICULTY = 7;
     private static final int COL_EXPERTNOTES = 8;
     private static final int COL_MASTERDIFFICULTY = 9;
     private static final int COL_MASTERNOTES = 10;
+
+    private TextView mCardDifficultyName;
+    private TextView mCardDifficultyLevel;
+    private TextView mCardDifficultyNoteCount;
+
+    private String mDifficultyName;
 
     public DifficultyDetailsFragment() {
         // Required empty public constructor
@@ -71,8 +81,8 @@ public class DifficultyDetailsFragment extends Fragment implements LoaderManager
         super.onCreate(savedInstanceState);
         mPagePosition = this.getArguments().getInt(ARG_DIFFICULTY_PAGE);
         difficultyQueryUri = this.getArguments().getParcelable(DIFFICULT_URI_KEY);
-        Log.v(LOG_TAG, "check check check x5");
 
+        getLoaderManager().initLoader(DIFFICULTYLOADERCURSOR, null, this);
     }
 
     @Override
@@ -81,17 +91,81 @@ public class DifficultyDetailsFragment extends Fragment implements LoaderManager
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.fragment_difficulty_details, container, false);
 
+        mCardDifficultyName = (TextView) mRootView.findViewById(R.id.card_Difficulty_Name);
+        mCardDifficultyLevel = (TextView) mRootView.findViewById(R.id.difficulty_level);
+        mCardDifficultyNoteCount = (TextView) mRootView.findViewById(R.id.difficulty_notes);
+
+        mCardDifficultyName.setText(mDifficultyName);
+
         return mRootView;
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
+        return new CursorLoader(getActivity(),
+                difficultyQueryUri,
+                difficulty_columns,
+                null,
+                null,
+                null
+        );
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (data != null && data.moveToFirst()) {
 
+            switch (mPagePosition) {
+                case 0 : {
+                    mCardDifficultyName.setText(getActivity().getResources().getString(R.string.easy_string));
+                    mCardDifficultyName.setContentDescription(getActivity().getResources().getString(R.string.easy_string));
+                    mCardDifficultyLevel.setText(String.valueOf(data.getInt(COL_EASYDIFFICULTY)));
+                    mCardDifficultyLevel.setContentDescription(String.valueOf(data.getInt(COL_EASYDIFFICULTY)));
+                    mCardDifficultyNoteCount.setText(String.valueOf(data.getInt(COL_EASYNOTES)));
+                    mCardDifficultyNoteCount.setContentDescription(String.valueOf(data.getInt(COL_EASYNOTES)));
+                    break;
+                }
+                case 1 : {
+                    mCardDifficultyName.setText(getActivity().getResources().getString(R.string.normal_string));
+                    mCardDifficultyName.setContentDescription(getActivity().getResources().getString(R.string.normal_string));
+                    mCardDifficultyLevel.setText(String.valueOf(data.getInt(COL_NORMALDIFFICULTY)));
+                    mCardDifficultyLevel.setContentDescription(String.valueOf(data.getInt(COL_NORMALDIFFICULTY)));
+                    mCardDifficultyNoteCount.setText(String.valueOf(data.getInt(COL_NORMALNOTES)));
+                    mCardDifficultyNoteCount.setContentDescription(String.valueOf(data.getInt(COL_NORMALNOTES)));
+                    break;
+                }
+                case 2 : {
+                    mCardDifficultyName.setText(getActivity().getResources().getString(R.string.hard_string));
+                    mCardDifficultyName.setContentDescription(getActivity().getResources().getString(R.string.hard_string));
+                    mCardDifficultyLevel.setText(String.valueOf(data.getInt(COL_HARDDIFFICULTY)));
+                    mCardDifficultyLevel.setContentDescription(String.valueOf(data.getInt(COL_HARDDIFFICULTY)));
+                    mCardDifficultyNoteCount.setText(String.valueOf(data.getInt(COL_HARDNOTES)));
+                    mCardDifficultyNoteCount.setContentDescription(String.valueOf(data.getInt(COL_HARDNOTES)));
+                    break;
+                }
+                case 3 : {
+                    mCardDifficultyName.setText(getActivity().getResources().getString(R.string.expert_string));
+                    mCardDifficultyName.setContentDescription(getActivity().getResources().getString(R.string.expert_string));
+                    mCardDifficultyLevel.setText(String.valueOf(data.getInt(COL_EXPERTDIFFICULTY)));
+                    mCardDifficultyLevel.setContentDescription(String.valueOf(data.getInt(COL_EXPERTDIFFICULTY)));
+                    mCardDifficultyNoteCount.setText(String.valueOf(data.getInt(COL_EXPERTNOTES)));
+                    mCardDifficultyNoteCount.setContentDescription(String.valueOf(data.getInt(COL_EXPERTNOTES)));
+                    break;
+                }
+                case 4 : {
+                    mCardDifficultyName.setText(getActivity().getResources().getString(R.string.master_string));
+                    mCardDifficultyName.setText(getActivity().getResources().getString(R.string.master_string));
+                    mCardDifficultyLevel.setText(String.valueOf(data.getInt(COL_MASTERDIFFICULTY)));
+                    mCardDifficultyLevel.setContentDescription(String.valueOf(data.getInt(COL_MASTERDIFFICULTY)));
+                    mCardDifficultyNoteCount.setText(String.valueOf(data.getInt(COL_MASTERNOTES)));
+                    mCardDifficultyNoteCount.setContentDescription(String.valueOf(data.getInt(COL_MASTERNOTES)));
+                    break;
+                }
+                default:
+                    throw new UnsupportedOperationException("Unknown position at: " + String.valueOf(mPagePosition));
+            }
+
+        }
     }
 
     @Override

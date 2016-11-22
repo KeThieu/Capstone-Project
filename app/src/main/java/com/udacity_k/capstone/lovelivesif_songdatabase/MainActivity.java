@@ -1,5 +1,6 @@
 package com.udacity_k.capstone.lovelivesif_songdatabase;
 
+import android.app.ActivityOptions;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,25 +8,32 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.udacity_k.capstone.lovelivesif_songdatabase.adapters.AttributePageAdapter;
 import com.udacity_k.capstone.lovelivesif_songdatabase.adapters.SongAdapter;
 import com.udacity_k.capstone.lovelivesif_songdatabase.dataRequest.fetchSongData;
 import com.udacity_k.capstone.lovelivesif_songdatabase.dataRequest.fetchSongsIntentService;
 import com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongGridFragment;
+import com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongItemDetailActivityFragment;
 
 public class MainActivity extends AppCompatActivity implements SongGridFragment.OnSongGridFragmentInteractionListener {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -34,20 +42,36 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
     private ViewPager mViewPager;
     private Snackbar updateSnackbar;
     private Snackbar networkSnackbar;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     private final String updatingKey = "UPDATING";
     private boolean isUpdating = false; //flag for updating snackbar
     private boolean isConnected = true; //flag for network error, prevent user from touching for details
+    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //For now, when tablet implementation happens, don't set orientation to portrait
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        if(findViewById(R.id.tablet_detail_container) != null) {
+            mTwoPane = true;
+            //For now, when tablet implementation happens, don't set orientation to portrait
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.tablet_detail_container, new SongItemDetailActivityFragment())
+                    .commit();
+        } else {
+            mTwoPane = false;
+            //For now, when tablet implementation happens, don't set orientation to portrait
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         mCoordinatorLayout = (CoordinatorLayout) this.findViewById(R.id.coordinator_root);
         mTabLayout = (TabLayout) this.findViewById(R.id.tab_Layout);
@@ -55,6 +79,11 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
 
         mViewPager.setAdapter(new AttributePageAdapter(getSupportFragmentManager(), this));
         mTabLayout.setupWithViewPager(mViewPager);
+
+        //setting up Content Descriptions for Tabs
+        mTabLayout.getTabAt(0).setContentDescription(R.string.smile_string);
+        mTabLayout.getTabAt(1).setContentDescription(R.string.pure_string);
+        mTabLayout.getTabAt(2).setContentDescription(R.string.cool_string);
 
         //new fetchSongData(this).execute();
         if(savedInstanceState == null) {
@@ -68,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
                 startService(new Intent(this, fetchSongsIntentService.class));
             }
         }
+
+
     }
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -172,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
         //if updating, on screen orietentation change, don't run update again
         Log.v(LOG_TAG, "Update on Save is : " + String.valueOf(isUpdating));
         savedInstanceState.putBoolean(updatingKey, isUpdating);
+        isUpdating = false;
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -180,7 +212,21 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
         //this is called when item is clicked, launch detail activity here
         Log.v(LOG_TAG, "MainActivity onFragmentInteraction is called");
 
-        Intent intent = new Intent(this, SongItemDetailActivity.class).setData(uri);
-        startActivity(intent);
+        if(mTwoPane) {
+            //Tablet
+            SongItemDetailActivityFragment fragment = SongItemDetailActivityFragment.newInstance(uri);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.tablet_detail_container, fragment)
+                    .commit();
+        } else {
+            //Phone
+            Intent intent = new Intent(this, SongItemDetailActivity.class).setData(uri);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle() );
+            } else {
+                startActivity(intent);
+            }
+        }
     }
 }

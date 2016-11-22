@@ -6,4 +6,16 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="AppTheme.MainActivity" parent="@style/AppTheme">
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/grid_exit</item>
+        <item name="android:windowExitTransition">@transition/grid_exit</item>
+    </style>
+
+    <style name="AppTheme.DetailActivity" parent="@style/AppTheme">
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/detail_enter_transition</item>
+        <item name="android:windowExitTransition">@transition/detail_exit_transition</item>
+    </style>
 </resources>

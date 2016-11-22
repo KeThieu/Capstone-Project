@@ -19,14 +19,5 @@
         android:layout_height="match_parent"
         android:id="@+id/main_viewPager"
         android:layout_below="@id/tab_Layout"/>
-    <!--
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_songgrid"
-        android:name="com.udacity_k.capstone.lovelivesif_songdatabase.fragments.SongGridFragment">
-
-    </fragment>
-    -->
 
 </RelativeLayout>

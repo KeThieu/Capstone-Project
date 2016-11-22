@@ -19,8 +19,19 @@
     <dimen name="detail_textPadding">10dp</dimen>
     <dimen name="detail_textDetailPadding">4dp</dimen>
     <dimen name="detail_textNameBoxPadding">16dp</dimen>
+    <dimen name="detail_horizontalMargin">16dp</dimen>
 
     <!--Card Values -->
-    <dimen name="card_padding">24dp</dimen>
+    <dimen name="card_title_padding">24dp</dimen>
+    <dimen name="card_padding">60dp</dimen>
+    <dimen name="cards_difficulty_width">250dp</dimen>
+    <dimen name="cards_difficulty_height">250dp</dimen>
+    <dimen name="cards_difficulty_details_padding">20dp</dimen>
+
+    <!--Widget Values -->
+    <dimen name="detail_widget_defaultWidth">160dp</dimen>
+    <dimen name="detail_widget_defaultHeight">40dp</dimen>
+    <dimen name="detail_widget_imageView_size">80dp</dimen>
+    <dimen name="detail_widget_textPadding">8dp</dimen>
 
 </resources>

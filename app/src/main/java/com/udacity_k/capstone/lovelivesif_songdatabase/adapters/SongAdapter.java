@@ -66,8 +66,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.songImageViewH
                     .crossFade()
                     .into(holder.songImage);
 
+            //Setting up Content Descriptions for List Items
+            holder.songImage.setContentDescription(imageURL);
             holder.songName.setText(songName);
+            holder.songName.setContentDescription(songName);
             holder.songUnit.setText(songUnit);
+            holder.songUnit.setContentDescription(songUnit);
 
         }
     }

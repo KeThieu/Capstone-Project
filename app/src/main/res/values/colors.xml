@@ -8,7 +8,7 @@
     <color name="colorDetailNameTextBox">#9E9E9E</color>
     <color name="colorDetailTextBox">#BDBDBD</color>
     <color name="colorListItemText">#000000</color>
-    <color name="colorListItemText2">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorListItemTextMuse">#F06292</color>
     <color name="colorListItemTextAqours">#42A5F5</color>
 </resources>

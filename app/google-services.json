@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "648176087568",
+    "firebase_url": "https://lovelivesifsongdatabase.firebaseio.com",
+    "project_id": "lovelivesifsongdatabase",
+    "storage_bucket": "lovelivesifsongdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648176087568:android:d730de5e08bd56ce",
+        "android_client_info": {
+          "package_name": "com.udacity_k.capstone.lovelivesif_songdatabase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648176087568-m3mvrkn8qqi4igfqou5h3gf71ekq5a45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeKHSFg_gUyUAo32egXG3bH0BuNK4-eS4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

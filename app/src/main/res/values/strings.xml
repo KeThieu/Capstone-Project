@@ -37,7 +37,18 @@
     <string name="difficulty_level_name">Difficulty Level</string>
     <string name="difficulty_notes_name">Note Count</string>
 
+    <!--CardView Difficulty Names-->
+    <string name="easy_string">Easy</string>
+    <string name="normal_string">Normal</string>
+    <string name="hard_string">Hard</string>
+    <string name="expert_string">Expert</string>
+    <string name="master_string">Master</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_song_item_detail">SongItemDetailActivity</string>
+    <string name="title_detail_widget">Daily LLSIF Song</string>
+
+    <!-- For TestAd -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

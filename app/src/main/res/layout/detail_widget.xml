@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/detail_widget_textPadding"
+    android:background="@color/colorWhite"
+    android:id="@+id/widget_frameRoot">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="@dimen/detail_widget_imageView_size"
+            android:layout_height="@dimen/detail_widget_imageView_size"
+            android:id="@+id/widget_imageview"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/widget_imageview"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Song Title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorListItemText"
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/detail_widget_textPadding"
+                android:paddingBottom="@dimen/detail_widget_textPadding"
+                android:id="@+id/widget_songNameTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Main Unit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorListItemText"
+                android:layout_gravity="center"
+                android:paddingBottom="@dimen/detail_widget_textPadding"
+                android:id="@+id/widget_unitTextView"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

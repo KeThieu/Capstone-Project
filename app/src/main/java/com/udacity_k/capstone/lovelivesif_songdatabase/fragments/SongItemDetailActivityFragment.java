@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import com.bumptech.glide.Glide;
 import com.udacity_k.capstone.lovelivesif_songdatabase.R;
@@ -37,7 +39,7 @@ import java.text.SimpleDateFormat;
 public class SongItemDetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     private static final String LOG_TAG = SongItemDetailActivityFragment.class.getSimpleName();
     public static final String Uri_BundleKey = "URI";
-    public static Uri queryUri;
+    public static Uri queryUri = null;
 
     private static final int SONGDETAILLOADER = 0;
 
@@ -100,6 +102,7 @@ public class SongItemDetailActivityFragment extends Fragment implements LoaderMa
     private TextView mSongLengthView;
     private TextView mBPMView;
     private TextView mAvailableView;
+    private AdView mAdView;
 
     private String mTitle = "";
     private int mMinutesValue = 0;
@@ -179,24 +182,31 @@ public class SongItemDetailActivityFragment extends Fragment implements LoaderMa
         mDifficultiesViewPager = (ViewPager) mRootView.findViewById(R.id.frag_difficultiesViewPager);
         mDifficultiesViewPager.setAdapter(new DifficultiesPageAdapter(getChildFragmentManager(), queryUri, getActivity()));
 
+        mAdView = (AdView) mRootView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         return mRootView;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        getLoaderManager().initLoader(SONGDETAILLOADER, null, this);
+        if(queryUri != null) {
+            getLoaderManager().initLoader(SONGDETAILLOADER, null, this);
+        }
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        return new CursorLoader(getActivity(),
-                queryUri,
-                songDetailColumns,
-                null,
-                null,
-                null);
+            return new CursorLoader(getActivity(),
+                    queryUri,
+                    songDetailColumns,
+                    null,
+                    null,
+                    null);
+
     }
 
     @Override
@@ -214,15 +224,34 @@ public class SongItemDetailActivityFragment extends Fragment implements LoaderMa
                         .into(mImageView);
             }
 
+            //setting values and content descriptions too
+            mImageView.setContentDescription(imageURL);
+
             mTitle = data.getString(COL_SONGNAME);
             mSongNameView.setText(mTitle);
+            mSongNameView.setContentDescription(mTitle);
+
             mRomanizedNameView.setText(data.getString(COL_ROMANIZEDNAME));
+            mRomanizedNameView.setContentDescription(data.getString(COL_ROMANIZEDNAME));
+
             mTranslatedNameView.setText(data.getString(COL_TRANSLATEDNAME));
+            mTranslatedNameView.setContentDescription(data.getString(COL_TRANSLATEDNAME));
+
             mUnitNameView.setText(data.getString(COL_MAINUNIT));
+            mUnitNameView.setContentDescription(data.getString(COL_MAINUNIT));
+
             mAttributeView.setText(data.getString(COL_ATTRIBUTE));
+            mAttributeView.setContentDescription(data.getString(COL_ATTRIBUTE));
+
             mSongLengthView.setText(convertSongLength(songLength));
+            mSongLengthView.setContentDescription(convertSongLength(songLength));
+
             mBPMView.setText(data.getString(COL_BPM)); //its an int, but printing as string is fine too
+            mBPMView.setContentDescription(data.getString(COL_BPM));
+
             mAvailableView.setText(data.getString(COL_AVAILABLE));
+            mAvailableView.setContentDescription(data.getString(COL_AVAILABLE));
+
         }
     }
 

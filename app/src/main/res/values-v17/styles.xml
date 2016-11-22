@@ -36,4 +36,25 @@
         <item name="android:paddingStart">@dimen/detail_textDetailPadding</item>
         <item name="android:paddingBottom">@dimen/detail_textCaptionPadding</item>
     </style>
+
+    <style name="card_detailsBoxStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/cards_difficulty_details_padding</item>
+        <item name="android:paddingStart">@dimen/cards_difficulty_details_padding</item>
+        <item name="android:paddingRight">@dimen/cards_difficulty_details_padding</item>
+        <item name="android:paddingEnd">@dimen/cards_difficulty_details_padding</item>
+        <item name="android:paddingBottom">@dimen/cards_difficulty_details_padding</item>
+    </style>
+
+    <style name="detail_viewPagerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:paddingLeft">@dimen/card_padding</item>
+        <item name="android:paddingStart">@dimen/card_padding</item>
+        <item name="android:paddingRight">@dimen/card_padding</item>
+        <item name="android:paddingEnd">@dimen/card_padding</item>
+    </style>
+
 </resources>
