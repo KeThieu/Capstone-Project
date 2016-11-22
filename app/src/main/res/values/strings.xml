@@ -24,6 +24,10 @@
     <!-- Action Bar Icon Name -->
     <string name="action_sync" translatable="false">Sync</string>
 
+    <!-- List Strings -->
+    <string name="default_song_name">Default Song Name</string>
+    <string name="default_unit_name">Default Unit Name</string>
+
     <!--Detail Caption Strings -->
     <string name="song_name">Song Name</string>
     <string name="romanized_name">Romanized Name</string>

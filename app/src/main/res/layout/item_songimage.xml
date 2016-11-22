@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/song_title_text"
-            android:text="default song name"
+            android:text="@string/default_song_name"
             android:fontFamily="sans-serif"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/colorListItemText"/>
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/song_unit_text"
-            android:text="default song unit"
+            android:text="@string/default_unit_name"
             android:fontFamily="sans-serif"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textColor="@color/colorListItemText"
