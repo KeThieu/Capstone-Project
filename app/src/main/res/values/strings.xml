@@ -61,6 +61,10 @@
     <string name="ErrorClosingStream">Error Closing Stream</string>
     <string name="SQLException">SQLException</string>
 
+    <!--widget strings -->
+    <string name="widget_song_title">Song Title</string>
+    <string name="widget_unit_title">Main Unit</string>
+
 
     <!-- For TestAd -->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>

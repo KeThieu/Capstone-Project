@@ -25,7 +25,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Song Title"
+                android:text="@string/widget_song_title"
+                android:contentDescription="@string/widget_song_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorListItemText"
                 android:layout_gravity="center"
@@ -36,7 +37,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Main Unit"
+                android:text="@string/widget_unit_title"
+                android:contentDescription="@string/widget_unit_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorListItemText"
                 android:layout_gravity="center"
