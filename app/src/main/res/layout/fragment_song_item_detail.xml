@@ -14,7 +14,6 @@
         android:fitsSystemWindows="true"
         android:id="@+id/frag_coordinatorLayout"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="50dp"
         tools:showIn="@layout/content_song_item_detail">
 
         <android.support.design.widget.AppBarLayout
@@ -172,16 +171,5 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

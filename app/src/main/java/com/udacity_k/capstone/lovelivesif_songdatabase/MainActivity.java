@@ -74,10 +74,10 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
         mViewPager.setAdapter(new AttributePageAdapter(getSupportFragmentManager(), this));
         mTabLayout.setupWithViewPager(mViewPager);
 
-        //setting up Content Descriptions for Tabs
-        mTabLayout.getTabAt(0).setContentDescription(R.string.smile_string);
-        mTabLayout.getTabAt(1).setContentDescription(R.string.pure_string);
-        mTabLayout.getTabAt(2).setContentDescription(R.string.cool_string);
+//        //setting up Content Descriptions for Tabs
+//        mTabLayout.getTabAt(0).setContentDescription(R.string.smile_string);
+//        mTabLayout.getTabAt(1).setContentDescription(R.string.pure_string);
+//        mTabLayout.getTabAt(2).setContentDescription(R.string.cool_string);
 
         if(savedInstanceState == null) {
             startService(new Intent(this, fetchSongsIntentService.class));
@@ -102,9 +102,7 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
                     //Network Error, pop a snackbar with a retry action
                     isConnected = false;
 
-
                     if(null == networkSnackbar) {
-                        Log.v(LOG_TAG, "Network Error in Fetch Service(MainActivity)");
                         networkSnackbar = Snackbar.make(mCoordinatorLayout, resources.getString(R.string.NetworkError_Str), Snackbar.LENGTH_INDEFINITE);
                         networkSnackbar.setAction(resources.getString(R.string.NetworkErrorSnackbarAction_Str), new View.OnClickListener() {
                             @Override
@@ -123,13 +121,11 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
 
                     if (intent.getBooleanExtra(fetchSongsIntentService.FETCHING_EXTRA, false)) {
                         if (null == updateSnackbar) {
-                            Log.v(LOG_TAG, "null snackbar");
                             isUpdating = true;
                             updateSnackbar = Snackbar.make(mCoordinatorLayout, resources.getString(R.string.Updating_Str), Snackbar.LENGTH_INDEFINITE);
                             updateSnackbar.show();
                         }
                     } else if (!(intent.getBooleanExtra(fetchSongsIntentService.FETCHING_EXTRA, false))) {
-                        Log.v(LOG_TAG, "Remove Snackbar");
                         if (updateSnackbar != null) {
                             updateSnackbar.dismiss();
                             isUpdating = false;
@@ -176,7 +172,6 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         //if updating, on screen orietentation change, don't run update again
-        Log.v(LOG_TAG, "Update on Save is : " + String.valueOf(isUpdating));
         savedInstanceState.putBoolean(updatingKey, isUpdating);
         isUpdating = false;
         super.onSaveInstanceState(savedInstanceState);
@@ -185,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements SongGridFragment.
     @Override
     public void onFragmentInteraction(Uri uri, SongAdapter.songImageViewHolder vh) {
         //this is called when item is clicked, launch detail activity here
-        Log.v(LOG_TAG, "MainActivity onFragmentInteraction is called");
 
         if(mTwoPane) {
             //Tablet

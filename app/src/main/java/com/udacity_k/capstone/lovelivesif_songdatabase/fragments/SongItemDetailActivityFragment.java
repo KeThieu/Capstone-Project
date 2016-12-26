@@ -21,8 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import com.bumptech.glide.Glide;
 import com.udacity_k.capstone.lovelivesif_songdatabase.R;
@@ -98,7 +96,6 @@ public class SongItemDetailActivityFragment extends Fragment implements LoaderMa
     private TextView mSongLengthView;
     private TextView mBPMView;
     private TextView mAvailableView;
-    private AdView mAdView;
 
     private String mTitle = "";
     private int mMinutesValue = 0;
@@ -177,10 +174,6 @@ public class SongItemDetailActivityFragment extends Fragment implements LoaderMa
 
         mDifficultiesViewPager = (ViewPager) mRootView.findViewById(R.id.frag_difficultiesViewPager);
         mDifficultiesViewPager.setAdapter(new DifficultiesPageAdapter(getChildFragmentManager(), queryUri, getActivity()));
-
-        mAdView = (AdView) mRootView.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         return mRootView;
     }
