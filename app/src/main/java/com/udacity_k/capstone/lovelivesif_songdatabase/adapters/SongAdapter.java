@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.songImageViewH
         String imageURL = mCursor.getString(SongGridFragment.COL_SONGIMAGE);
         String songName = mCursor.getString(SongGridFragment.COL_SONGNAME);
         String songUnit = mCursor.getString(SongGridFragment.COL_SONGMAINUNIT);
+
+        //as of 2/22/2017, the original imageURL wasn't loaded by Glide. Need to append http
+        imageURL = "http:" + imageURL;
 
         if(songUnit.equals(mContext.getResources().getString(R.string.AqoursText))) {
             //Aqours

@@ -203,6 +203,10 @@ public class SongItemDetailActivityFragment extends Fragment implements LoaderMa
         //populate the xml views here
         if(data != null && data.moveToFirst()) {
             String imageURL = data.getString(COL_IMAGE);
+
+            //as of 2/22/2017, the original imageURL wasn't loaded by Glide. Need to append http
+            imageURL = "http:" + imageURL;
+
             int songLength = data.getInt(COL_LENGTH);
 
             if (null != imageURL) {
