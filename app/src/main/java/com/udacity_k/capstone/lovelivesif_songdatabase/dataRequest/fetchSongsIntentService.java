@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,7 +53,7 @@ public class fetchSongsIntentService extends IntentService {
         ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
         if(activeNetwork == null || !activeNetwork.isConnected()) {
-            //Log.v(TAG, "Not connected to any active network");
+            Log.d(TAG, "Not connected to any active network");
             Intent networkStatusIntent = new Intent(FETCH_ACTION);
             networkStatusIntent.putExtra(NETWORK_ERROR, true);
             LocalBroadcastManager.getInstance(this).sendBroadcast(networkStatusIntent);
@@ -62,7 +63,7 @@ public class fetchSongsIntentService extends IntentService {
         Intent updateStatusIntent = new Intent(FETCH_ACTION);
         updateStatusIntent.putExtra(FETCHING_EXTRA, true);
         LocalBroadcastManager.getInstance(this).sendBroadcast(updateStatusIntent);
-        String authorityStr = "http://schoolido.lu/api/songs/";
+        String authorityStr = "https://schoolido.lu/api/songs/";
         //no queries I am interested in
         makeConnection(Uri.parse(authorityStr));
         insertSongData();
@@ -276,11 +277,19 @@ public class fetchSongsIntentService extends IntentService {
         try {
             URL url = new URL(uri.toString());
             connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("Content-Type", "application/json");
             connection.connect();
 
-            InputStream inputStream = connection.getInputStream();
+            //As of 3/17/2018, the http request is redirected to https, I need to handle this.
+            //Response Code 301 is HTTP_MOVED_PERM
+            if(connection.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM) {
+                String redirectURI = connection.getHeaderField("Location");
+                url = new URL(redirectURI);
+                connection = (HttpURLConnection) url.openConnection();
+            }
+
+            InputStream inputStream = new BufferedInputStream(connection.getInputStream());
             StringBuffer buffer = new StringBuffer();
-            if(inputStream == null) return null;
 
             reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
@@ -290,7 +299,7 @@ public class fetchSongsIntentService extends IntentService {
             if(buffer.length() == 0) return null;
 
             String songJSON = buffer.toString();
-            Log.v(TAG, songJSON + "\n + \n");
+            Log.d(TAG, songJSON + "\n + \n");
             parseJson(songJSON);
 
             return null;
